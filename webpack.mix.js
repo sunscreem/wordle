@@ -11,7 +11,7 @@ mix.setPublicPath(path.normalize('public'))
         require('tailwindcss/nesting'),
         require('tailwindcss'),
     ])
-
+    .vue({version:3})
     .sourceMaps(true,'source-map')
     .webpackConfig(require('./webpack.config'))
     .extract()
