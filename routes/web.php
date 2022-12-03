@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,5 +20,9 @@ Route::get('/', function () {
 });
 
 Route::get('/test', function () {
-    return Inertia::render('Home',['test'=>'yes!']);
+    $userData = [
+        'name' => 'Ian',
+        'scores' => User::whereName('Ian')->first()->wordleScores,
+    ];
+    return Inertia::render('Home',$userData);
 });

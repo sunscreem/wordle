@@ -17,4 +17,8 @@ class WordleScore extends Model
 
     public $timestamps = false;
 
+    protected $hidden = [
+        'user_id',
+    ];
+
 }

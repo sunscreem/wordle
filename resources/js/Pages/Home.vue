@@ -1,15 +1,21 @@
 <template>
   <div>
-    hello world {{ test }}
+    Scores for: {{ name }}
+    <pre>{{ scores }}</pre>
   </div>
 </template>
 
 <script setup>
 
 defineProps({
-  test: {
+  name: {
     type: String,
     required: true,
   },
+  scores: {
+    type: Array,
+    required: true,
+  },
+
 });
 </script>
