@@ -41,4 +41,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function wordleScores()
+    {
+        return $this->hasMany(WordleScore::class)->orderBy('game_id', 'asc');
+    }
 }
