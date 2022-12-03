@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Imports\WordleImport;
+use App\Models\WordleScore;
 use Illuminate\Console\Command;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -29,6 +30,8 @@ class ImportWordle extends Command
      */
     public function handle()
     {
+
+        WordleScore::truncate();
 
         Excel::import(new WordleImport, storage_path('Wordle.xlsx'));
 
