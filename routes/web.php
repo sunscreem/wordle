@@ -19,5 +19,5 @@ Route::get('/', function () {
 });
 
 Route::get('/test', function () {
-    return Inertia::render('Home',['test'=>'yes']);
+    return Inertia::render('Home',['test'=>'yes!']);
 });

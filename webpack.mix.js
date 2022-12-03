@@ -21,7 +21,7 @@ mix.setPublicPath(path.normalize('public'))
         notify: false,
         files: [
             "resources/**/*.blade.php",
-            "web/**/*.(js|css|svg)",
+            "public/**/*.(js|css|svg)",
             "tailwind.config.js"
         ],
     });

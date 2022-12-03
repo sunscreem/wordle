@@ -6,6 +6,9 @@ module.exports = {
             '@Components': path.resolve('assets/js/Components'),
         },
     },
+    devServer: {
+        headers: { "Access-Control-Allow-Origin": "*"},
+    }
 };
 
 
