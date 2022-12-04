@@ -15,6 +15,10 @@ class WordleScore extends Model
         'game_id',
     ];
 
+    protected $casts = [
+        'game_id' => 'integer',
+    ];
+
     public $timestamps = false;
 
     protected $hidden = [
