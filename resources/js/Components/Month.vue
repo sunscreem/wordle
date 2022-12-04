@@ -1,6 +1,15 @@
 <template>
   <div>
-    <h1 class="text-sm mb-8 font-bold">Month - {{ props.month+1 }}</h1>
+    <h1 class="text-sm my-8 font-bold">Month - {{ props.month+1 }}</h1>
+    <div v-for="(day,i) in allDays" :key="i" >
+      {{ day.dayOfWeek }} -
+       <span v-if="day.day">
+        {{ day.day.toString() }}
+      </span>
+      <span v-else>
+        null
+      </span>
+    </div>
     <!-- <week v-for="week in weeksInMonth" :key="week.start" :week="week"></week> -->
   </div>
 </template>
@@ -19,7 +28,7 @@ const props = defineProps({
 
 // create an array of this months days
 const startOfMonth = DateTime.local().set({ day: 1, month: props.month + 1, year: 2022 });
-const endOfMonth = DateTime.fromObject({day:1, month:props.month+1, year: 2022}).plus({months:1}).minus({days:1});
+const endOfMonth = DateTime.fromObject({day:1, month:props.month+1, year: 2022}).plus({months:1});
 
 const daysInMonth = Interval.fromDateTimes(
   startOfMonth, endOfMonth
@@ -27,11 +36,13 @@ const daysInMonth = Interval.fromDateTimes(
 
 // console.log(daysInMonth.start);
 
+// console.log(daysInMonth.end.minus({days:1}));
+
 const startOfMonthPaddingNeeded = daysInMonth.start.weekday-1;
-const endOfMonthPaddingNeeded = 7-daysInMonth.end.weekday;
+const endOfMonthPaddingNeeded = 7-daysInMonth.end.minus({days:1}).weekday;
 
 // construct the weeks
-const allDays = [...Array(startOfMonthPaddingNeeded).keys()].map((i) => {
+let allDays = [...Array(startOfMonthPaddingNeeded).keys()].map((i) => {
   return { day:null }
 })
 .concat(daysInMonth.splitBy({ days: 1 }).map((day) => {
@@ -43,8 +54,21 @@ const allDays = [...Array(startOfMonthPaddingNeeded).keys()].map((i) => {
   return { day:null }
 }));
 
+let dayCount = -1;
+const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat','Sun'];
+
+allDays = allDays.map((day) => {
+  dayCount++;
+  if (dayCount == 7) { dayCount = 0; }
+  return { day:day.day, dayOfWeek:days[dayCount] }
+})
+
+// const weeks = [...Array(Math.ceil(allDays.length / 7))].map(_ => allDays.splice(0,7))
+
+// console.log(weeks);
+
 // maybe you don't even need to faff with weeks if this is in a 7x grid?
-console.log(allDays);
+// console.log(allDays);
 
 
 
@@ -59,7 +83,7 @@ console.log(allDays);
 //   }
 // }));
 
-console.log(daysInMonth.end,daysInMonth.end.weekday,endOfMonthPaddingNeeded);
+// console.log(daysInMonth.end,daysInMonth.end.weekday,endOfMonthPaddingNeeded);
 // const days = daysInMonth.map((day) => {
 //   return day.start;
 // });
