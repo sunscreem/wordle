@@ -22,7 +22,7 @@ Route::get('/', function () {
 Route::get('/test', function () {
     $userData = [
         'name' => 'Ian',
-        'scores' => User::whereName('Susan')->first()->wordleScores,
+        'scores' => User::whereName('Ian')->first()->wordleScores,
     ];
     return Inertia::render('Home',$userData);
 });

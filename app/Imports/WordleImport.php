@@ -18,7 +18,8 @@ class WordleImport implements ToCollection, WithHeadingRow
             return $row['ian'] > 0
                 && $row['liz'] > 0
                 && $row['rob'] > 0
-                && $row['susan'] > 0;
+                && $row['susan'] > 0
+                && $row['alex'] > 0;
         })->each(function ($row) {
 
             User::whereName('Ian')->first()
@@ -36,6 +37,10 @@ class WordleImport implements ToCollection, WithHeadingRow
             User::whereName('Susan')->first()
             ->wordleScores()
             ->create(['score' => $row['susan'], 'game_id' => $row[0]]);
+
+            User::whereName('Alex')->first()
+            ->wordleScores()
+            ->create(['score' => $row['alex'], 'game_id' => $row[0]]);
 
         });
     }
